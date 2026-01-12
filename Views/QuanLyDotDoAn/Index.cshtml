@@ -1,0 +1,117 @@
+﻿@model IEnumerable<DATN_TMS.Models.DotDoAn>
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 20px;">Quản lý đợt đồ án</h2>
+                    
+                    <div class="toolbar-row">
+                        <div class="toolbar-left">
+                            <div class="filter-item">
+                                <span class="filter-label">Học kì</span>
+                                <select class="toolbar-input" style="width: 150px;">
+                                    <option value="">-- Tất cả --</option>
+                                    <option value="K26">101</option>
+                                    <option value="K27">102</option>
+                                    <option value="K28">103</option>
+                                </select>
+                             </div>
+
+                             <div class="filter-item">
+                                <span class="filter-label">Năm học</span>
+                                <select class="toolbar-input" style="width: 150px;">
+                                    <option value="">-- Tất cả --</option>
+                                    <option value="K26">2023-2024</option>
+                                    <option value="K27">2024-2025</option>
+                                    <option value="K28">2025-2026</option>
+                                </select>
+                             </div>
+
+
+
+                            <div class="filter-item">
+                                <span class="filter-label">Khóa</span>
+                                <select class="toolbar-input" style="width: 150px;">
+                                    <option value="">-- Tất cả --</option>
+                                    <option value="K26">Khóa 26</option>
+                                    <option value="K27">Khóa 27</option>
+                                    <option value="K28">Khóa 28</option>
+                                </select>
+                             </div>
+                        </div>
+
+                        <div class="toolbar-right">
+                            <div style="display:flex; align-items:center; gap:5px;">
+                                <span class="filter-label">Tìm kiếm:</span>
+                                <input type="text" class="toolbar-input" placeholder="Nhập từ khóa..." style="width: 250px;">
+                            </div>
+                            <button class="btn btn-primary" id="btnOpenModal">
+                                <i class="fa-solid fa-plus"></i> Thêm đợt đồ án
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tên đợt</th>
+                                    <th>Khóa</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.TenDot
+                                        </td>
+
+                                        <td>
+                                            <div>@item.IdKhoaHocNavigation?.TenKhoa</div>
+                                            
+                                        </td>
+                            
+                                        <td>
+                                            <div>@(item.NgayBatDauDot.HasValue ? item.NgayBatDauDot.Value.ToString("dd/MM/yyyy") : "---")</div>
+                                        </td>
+
+                                         <td>
+                                            <div>@(item.NgayKetThucDot.HasValue ? item.NgayKetThucDot.Value.ToString("dd/MM/yyyy") : "---")</div>
+                                        </td>
+                            
+                                        <td>
+                                            @if (item.TrangThai == true) 
+                                            {
+                                                <span class="status-badge status-running">Đang diễn ra</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="status-badge" style="background-color: #95a5a6; color: white;">Đã đóng</span>
+                                            }
+                                        </td>
+                            
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="action-btn btn-edit-icon" title="Sửa">
+                                                <i class="fa-regular fa-pen-to-square"></i>
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="action-btn btn-view-icon" title="Xem chi tiết">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="action-btn btn-delete-icon" title="Xóa">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
