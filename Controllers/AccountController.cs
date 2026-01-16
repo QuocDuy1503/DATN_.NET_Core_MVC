@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DATN_TMS.Models; // Đảm bảo namespace đúng
-using Microsoft.AspNetCore.Http; // Để dùng Session
+using DATN_TMS.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DATN_TMS.Controllers
 {
@@ -17,9 +17,12 @@ namespace DATN_TMS.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            // Nếu đã đăng nhập rồi thì đá về trang chủ quản lý, không cần đăng nhập lại
             if (HttpContext.Session.GetString("UserEmail") != null)
             {
+                if (HttpContext.Session.GetString("Role") == "BCN_KHOA")
+                {
+                    return RedirectToAction("Index", "QuanLyDotDoAn", new { area = "BCNKhoa" });
+                }
                 return RedirectToAction("Index", "QuanLyDotDoAn");
             }
             return View();
@@ -28,10 +31,8 @@ namespace DATN_TMS.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            // 1. Kiểm tra database: Tìm user có Email + Pass khớp + TrangThai đang hoạt động (1)
-            // Lưu ý: Password trong DB của bạn đang là 'pass123' (chưa mã hóa), nên so sánh trực tiếp
             var user = await _context.NguoiDungs
-                .Include(u => u.IdVaiTros)         // Join sang bảng trung gian
+                .Include(u => u.IdVaiTros)
                 .FirstOrDefaultAsync(u => u.Email == email && u.MatKhau == password && u.TrangThai == 1);
 
             if (user == null)
@@ -40,40 +41,61 @@ namespace DATN_TMS.Controllers
                 return View();
             }
 
-            // 2. Lấy quyền (Role) của user đó
-            // Lấy vai trò đầu tiên tìm thấy. Nếu không có thì gán là "Guest"
             var roleInfo = user.IdVaiTros.FirstOrDefault();
-            string roleCode = roleInfo?.MaVaiTro ?? "GUEST"; // Ví dụ: BCN_KHOA, GV, SV
-            
-            // 3. Lưu thông tin vào Session (Giống như cấp thẻ ra vào)
+            string roleCode = roleInfo?.MaVaiTro ?? "GUEST";
+
+            string userCode = "";
+
+            if (roleCode == "SV")
+            {
+                var sv = await _context.SinhViens.FirstOrDefaultAsync(s => s.IdNguoiDung == user.Id);
+
+                if (sv != null)
+                {
+                    userCode = sv.Mssv!;
+                }
+            }
+            else
+            {
+                var gv = await _context.GiangViens.FirstOrDefaultAsync(g => g.IdNguoiDung == user.Id);
+                if (gv != null)
+                {
+                    userCode = gv.MaGv ?? "GV";
+                }
+            }
+
             HttpContext.Session.SetString("UserEmail", user.Email);
             HttpContext.Session.SetString("FullName", user.HoTen ?? "Người dùng");
-            HttpContext.Session.SetString("Role", roleCode); // Lưu quyền để phân biệt Admin/SV
-            HttpContext.Session.SetString("Avatar", user.AvatarUrl ?? "/images/default-avatar.png");
+            HttpContext.Session.SetString("Role", roleCode);
+            HttpContext.Session.SetString("UserCode", userCode);
 
-            // 4. Điều hướng về trang tương ứng theo quyền
-            if (roleCode == "BCN_KHOA" || roleCode == "BO_MON")
+            if (roleCode == "BCN_KHOA")
             {
-                return RedirectToAction("Index", "QuanLyDotDoAn"); // Trang Admin bạn đã làm
+                return RedirectToAction("Index", "QuanLyDotDoAn", new { area = "BCNKhoa" });
             }
+
+            else if (roleCode == "BO_MON")
+            {
+                return RedirectToAction("Index", "QuanLyDotDoAn");
+            }
+
             else if (roleCode == "GV")
             {
-                // return RedirectToAction("Index", "GiangVien"); // Tạm thời chưa có thì về trang Admin test thử
-                return RedirectToAction("Index", "QuanLyDotDoAn");
-            }
-            else if (roleCode == "SV")
-            {
-                // return RedirectToAction("Index", "SinhVien"); // Tạm thời chưa có thì về trang Admin test thử
                 return RedirectToAction("Index", "QuanLyDotDoAn");
             }
 
-            // Mặc định về trang Admin để test
+            else if (roleCode == "SV")
+            {
+                return RedirectToAction("Index", "QuanLyDotDoAn");
+            }
+
             return RedirectToAction("Index", "QuanLyDotDoAn");
+
         }
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Xóa sạch session (Đăng xuất)
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
     }

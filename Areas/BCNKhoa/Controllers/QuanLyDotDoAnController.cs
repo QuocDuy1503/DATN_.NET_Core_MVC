@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using DATN_TMS.Models;
 
-namespace DATN_TMS.Controllers
+namespace DATN_TMS.Areas.BCNKhoa.Controllers
 {
+    [Area("BCNKhoa")]
     public class QuanLyDotDoAnController : Controller
     {
         private readonly QuanLyDoAnTotNghiepContext _context;

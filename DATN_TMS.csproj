@@ -15,4 +15,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\BCNKhoa\Models\ViewModel\" />
+    <Folder Include="Areas\BoMon\" />
+    <Folder Include="Areas\GiangVien\" />
+    <Folder Include="Areas\SinhVien\" />
+  </ItemGroup>
+
 </Project>

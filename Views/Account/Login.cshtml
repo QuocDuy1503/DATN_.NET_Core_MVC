@@ -17,6 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            /* overflow: hidden; */
         }
         .login-card {
             width: 100%;
@@ -39,27 +40,37 @@
 </head>
 <body>
     <div class="login-card">
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger text-center" role="alert">
-                @ViewBag.Error
-            </div>
-        }
-
         <form asp-action="Login" method="post">
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control form-control-lg" placeholder="Nhập email..." required>
+                <input type="email" name="email" class="form-control form-control-lg" placeholder="Nhập email hoac ma so" required>
             </div>
             
             <div class="mb-4">
                 <label class="form-label">Mật khẩu</label>
-                <input type="password" name="password" class="form-control form-control-lg" placeholder="Nhập mật khẩu..." required>
+                <input type="password" name="password" class="form-control form-control-lg" placeholder="Nhập mật khẩu" required>
             </div>
 
             <button type="submit" class="btn btn-login w-100 py-2 mb-3">ĐĂNG NHẬP</button>
            
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        var errorMessage = '@Html.Raw(ViewBag.Error)';
+
+        if (errorMessage && errorMessage.trim() !== "") {
+            Swal.fire({
+                icon: 'error',                
+                title: 'Đăng nhập thất bại', 
+                text: errorMessage,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Thử lại',
+                heightAuto: false,
+                scrollbarPadding: false
+            });
+        }
+    </script>
 </body>
 </html>

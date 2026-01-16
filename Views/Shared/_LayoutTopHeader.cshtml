@@ -45,8 +45,31 @@
                 <div class="user-dropdown-container" id="userDropdown">
                     <div class="user-profile">
                         <div class="user-info-text">
-                            <span class="user-name">Admin 2174802010297</span>
-                            <span class="user-role">BCN Khoa</span>
+                            <span class="user-name">
+                                @{
+                                    string fullName = Context.Session.GetString("FullName") ?? "User";
+                                    string firstName = fullName.Trim();
+                                    if (firstName.Contains(" "))
+                                    {
+                                        firstName = firstName.Substring(firstName.LastIndexOf(" ") + 1);
+                                    }
+        
+                                        string userCode = Context.Session.GetString("UserCode") ?? "";
+                                    }
+    
+                                   @firstName@(!string.IsNullOrEmpty(userCode) ? "." + userCode : "")
+                            </span>
+                            <span class="user-role">
+                                @{
+                                    var roleCode = Context.Session.GetString("Role");
+                                    var roleName = "Khách";
+                                    if(roleCode == "BCN_KHOA") roleName = "BCN Khoa";
+                                    else if(roleCode == "BO_MON") roleName = "Bo Mon";
+                                    else if(roleCode == "GV") roleName = "Giảng viên";
+                                    else if(roleCode == "SV") roleName = "Sinh viên";
+                                }
+                                @roleName
+                            </span>
                         </div>
                         <i class="fa-regular fa-circle-user user-avatar-icon"></i>
                         <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
@@ -59,7 +82,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item logout-item">
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item logout-item">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
                             </a>
                         </li>
