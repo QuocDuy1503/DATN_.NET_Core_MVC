@@ -1,0 +1,12 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace DATN_TMS.wwwroot.css
+{
+    public class XCT_KH : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}

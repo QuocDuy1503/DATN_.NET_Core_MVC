@@ -349,3 +349,9 @@ body, html { height: 100%; width: 100%; overflow: hidden; background-color: #f4f
 /* Scrollbar đẹp cho list thông báo */
 .notif-body::-webkit-scrollbar { width: 6px; }
 .notif-body::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+

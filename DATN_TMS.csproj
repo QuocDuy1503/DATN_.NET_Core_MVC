@@ -7,19 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\BCNKhoa\Models\**" />
+    <Compile Remove="Areas\BoMon\**" />
+    <Content Remove="Areas\BCNKhoa\Models\**" />
+    <Content Remove="Areas\BoMon\**" />
+    <EmbeddedResource Remove="Areas\BCNKhoa\Models\**" />
+    <EmbeddedResource Remove="Areas\BoMon\**" />
+    <None Remove="Areas\BCNKhoa\Models\**" />
+    <None Remove="Areas\BoMon\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\BCNKhoa\Models\ViewModel\" />
-    <Folder Include="Areas\BoMon\" />
-    <Folder Include="Areas\GiangVien\" />
-    <Folder Include="Areas\SinhVien\" />
   </ItemGroup>
 
 </Project>
