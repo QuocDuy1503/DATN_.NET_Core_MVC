@@ -81,7 +81,7 @@ namespace DATN_TMS.Controllers
 
             else if (roleCode == "GV")
             {
-                return RedirectToAction("Index", "QuanLyDotDoAn");
+                return RedirectToAction("Index", "QLSV");
             }
 
             else if (roleCode == "SV")

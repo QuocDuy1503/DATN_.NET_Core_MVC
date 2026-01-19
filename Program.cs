@@ -25,11 +25,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseSession(); 
+app.UseSession();
 
-//app.MapControllerRoute(
-//    name: "areas",
-//    pattern: "{area:exists}/{controller=QuanLyDotDoAn}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=QuanLyDotDoAn}/{action=Index}/{id?}");
+
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=QuanLyDotDoAn}/{action=DeXuatDT}/{id?}"
@@ -40,8 +41,8 @@ app.MapControllerRoute(
     pattern: "{controller=QuanLyDotDoAn}/{action=DeXuatDT}/{id?}"
 );
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Account}/{action=Login}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

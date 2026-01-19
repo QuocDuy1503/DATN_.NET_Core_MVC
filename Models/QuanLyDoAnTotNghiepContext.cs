@@ -343,9 +343,8 @@ public partial class QuanLyDoAnTotNghiepContext : DbContext
                 .HasColumnName("ngay_dang_ky");
             entity.Property(e => e.SoTinChiTichLuyHienTai).HasColumnName("so_tin_chi_tich_luy_hien_tai");
             entity.Property(e => e.TrangThai)
-                .HasMaxLength(20)
                 .IsUnicode(false)
-                .HasDefaultValue("CHO_XU_LY")
+                .HasDefaultValue(0)
                 .HasColumnName("trang_thai");
 
             entity.HasOne(d => d.IdDotNavigation).WithMany(p => p.DangKyNguyenVongs)
