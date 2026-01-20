@@ -13,7 +13,7 @@ public partial class DangKyNguyenVong
 
     public int? SoTinChiTichLuyHienTai { get; set; }
 
-    public string? TrangThai { get; set; }
+    public int? TrangThai { get; set; }
 
     public DateTime? NgayDangKy { get; set; }
 
