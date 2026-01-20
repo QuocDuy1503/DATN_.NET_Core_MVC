@@ -26,4 +26,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Sinhvien\Views\QL_DotDoAn\NewFolder\" />
+    <Folder Include="Areas\Sinhvien\Views\XDG_KQ\" />
+    <Folder Include="Areas\Sinhvien\Views\QL_DeTai\" />
+  </ItemGroup>
+
 </Project>

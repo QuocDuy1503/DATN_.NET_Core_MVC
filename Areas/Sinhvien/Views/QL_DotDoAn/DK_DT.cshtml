@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Đăng ký nguyện vọng";
+    Layout = "~/Views/Shared/_Layout_SV.cshtml";
+}
+<div class="content-body">
+    <div class="content-card">
+        <h2 class="page-title" style="margin-bottom: 20px;">Đăng kí đề tài</h2>
+
+        <div class="toolbar-row">
+            <div class="toolbar-left">
+                <div class="filter-item">
+                    <span class="filter-label">Năm học</span>
+                    <select class="toolbar-input" style="width: 150px;">
+                        <option value="">-- Tất cả --</option>
+                        <option value="K26">2023-2024</option>
+                        <option value="K27">2024-2025</option>
+                        <option value="K28">2025-2026</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <span class="filter-label">Học kì</span>
+                    <select class="toolbar-input" style="width: 150px;">
+                        <option value="">-- Tất cả --</option>
+                        <option value="K26">101</option>
+                        <option value="K27">102</option>
+                        <option value="K28">103</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <span class="filter-label">Khóa</span>
+                    <select class="toolbar-input" style="width: 150px;">
+                        <option value="">-- Tất cả --</option>
+                        <option value="K26">Khóa 26</option>
+                        <option value="K27">Khóa 27</option>
+                        <option value="K28">Khóa 28</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="toolbar-right">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span class="filter-label">Tìm kiếm:</span>
+                    <input type="text" class="toolbar-input" placeholder="Nhập từ khóa..." style="width: 250px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đề tài</th>
+                        <th>Tên đề tài</th>
+                        <th>Ngành</th>
+                        <th>GVHD</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DT01</td>
+                        <td class="ellipsis-30">Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS</td>
+                        <td>CNTT/CNPM</td>
+                        <td>Trương Quốc Duy</td>
+                        <td><span class="status-badge status-running">Chờ duyệt</span></td>
+                        <td>
+                            @* Đổi từ button onclick -> link MVC *@
+                            <a asp-area="Sinhvien"
+                               asp-controller="QL_DotDoAn"
+                               asp-action="XCT_DT"
+                               asp-route-id="1">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="~/css/XCT_DT.css" asp-append-version="true" />
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. DỮ LIỆU GIẢ LẬP (MỚI)
+        const projectData = {
+            id: "DT-2025-001",
+            name: "Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS",
+            supervisor: "Ngô Thị Tuyết Như",
+            goal: "Xây dựng mô hình AI có khả năng phân đoạn khối u não với độ chính xác cao trên 90% Dice Score.",
+            scope: "Phạm vi: Nghiên cứu trên bộ dữ liệu BraTS 2021. Chức năng: Upload ảnh MRI, Phân đoạn tự động, Xuất báo cáo y khoa, Tích hợp API cho bệnh viện.",
+            tech: "Python, PyTorch, U-Net, Transformer, Docker, ReactJS",
+            requirement: "Sử dụng kiến trúc lai giữa CNN và Transformer để tối ưu hóa việc trích xuất đặc trưng toàn cục và cục bộ. Cải thiện tốc độ xử lý so với các model cũ.",
+            result: "Mô hình đã huấn luyện (.pth), Web App Demo, Bài báo khoa học đăng trên tạp chí VLU.",
+            status: "Đang chờ duyệt",
+            comment: ""
+        };
+
+        // 2. FILL DỮ LIỆU VÀO CÁC Ô
+        document.getElementById('dtId').value = projectData.id;
+        document.getElementById('dtName').value = projectData.name;
+        document.getElementById('dtSupervisor').value = projectData.supervisor;
+
+        document.getElementById('dtGoal').value = projectData.goal;
+        document.getElementById('dtScope').value = projectData.scope; // Trường mới
+        document.getElementById('dtTech').value = projectData.tech;
+        document.getElementById('dtRequirement').value = projectData.requirement;
+        document.getElementById('dtResult').value = projectData.result;
+
+        updateStatusUI(projectData.status);
+
+        
+    });
+    
+    document.querySelectorAll(".ellipsis-30").forEach(td => {
+        const maxLength = 30;
+        const text = td.innerText.trim();
+
+        if (text.length > maxLength) {
+            td.innerText = text.substring(0, maxLength) + "...";
+            td.title = text; // hover xem full
+        }
+    });
+
+</script>

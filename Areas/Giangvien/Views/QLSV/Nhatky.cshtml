@@ -8,7 +8,12 @@
 
 <div class="content-body">
     <div class="content-card">
-        <h2 class="page-title" style="margin-bottom: 20px;">Nhật ký hướng dẫn</h2>
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb-simple">
+            <a asp-area="Giangvien" asp-controller="QLSV" asp-action="DSSV">Quản lý sinh viên</a>
+            <span>&gt;</span>
+            <span class="current">Nhật ký hướng dẫn</span>
+        </nav>
 
         <div class="toolbar-row">
             <div class="toolbar-left">
@@ -70,3 +75,4 @@
     </div>
 </div>
 <link rel="stylesheet" href="~/css/NK.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Breadcrum.css" asp-append-version="true" />

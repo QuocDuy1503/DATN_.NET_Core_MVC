@@ -1,92 +1,103 @@
 ﻿@{
-    ViewData["Title"] = "Đề xuất đề tài";
-    // Layout Lecturer bạn đang dùng
-    Layout = "~/Views/Shared/_Layout_GV.cshtml";
-
-
+    ViewData["Title"] = "Đăng ký nguyện vọng";
+    Layout = "~/Views/Shared/_Layout_SV.cshtml";
 }
 <div class="content-body">
-
     <div class="detail-container">
 
         <div class="info-section">
+
             <div class="form-header">
+                <!-- Breadcrumb -->
                 <nav class="breadcrumb-simple">
-                    <a asp-area="Giangvien" asp-controller="QuanLyDotDoAn" asp-action="DexuatDT">Đề xuất đề tài</a>
+                    <a asp-area="Sinhvien" asp-controller="QL_DotDoAn" asp-action="DK_DT">Đăng ký đề tài</a>
                     <span>&gt;</span>
-                    <span class="current">Chỉnh sửa đề xuất đề tài</span>
+                    <span class="current">Chi tiết đề tài</span>
                 </nav>
             </div>
 
             <div style="display: flex; gap: 20px;">
                 <div class="detail-group" style="width: 150px;">
                     <label>Mã đề tài:</label>
-                    <input type="text" class="detail-control" id="dtId">
+                    <input type="text" class="detail-control" id="dtId" readonly>
                 </div>
                 <div class="detail-group" style="flex: 1;">
                     <label>Tên đề tài:</label>
-                    <input type="text" class="detail-control" id="dtName">
+                    <input type="text" class="detail-control" id="dtName" readonly>
                 </div>
             </div>
 
             <div style="display: flex; gap: 20px;">
+
                 <div class="detail-group" style="flex: 1;">
                     <label>Giảng viên hướng dẫn:</label>
-                    <input type="text" class="detail-control" id="dtSupervisor">
+                    <input type="text" class="detail-control" id="dtSupervisor" readonly>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="detail-group">
-                    <label>Sinh viên thứ nhất:</label>
-                    <input type="text" class="detail-control" id="dtMember1">
-                </div>
-
-                <div class="detail-group">
-                    <label>Sinh viên thứ 2:</label>
-                    <input type="text" class="detail-control" id="dtMember2">
-                </div>
+            <div class="detail-group">
+                <label>Mục tiêu chính:</label>
+                <textarea class="detail-control" id="dtGoal" readonly></textarea>
             </div>
 
-            <div class="form-row">
-                <div class="detail-group">
-                    <label>Mục tiêu chính:</label>
-                    <textarea class="detail-control" id="dtGoal"></textarea>
-                </div>
-
-                <div class="detail-group">
-                    <label>Phạm vi và chức năng:</label>
-                    <textarea class="detail-control" id="dtScope"></textarea>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="detail-group">
-                    <label>Công nghệ sử dụng:</label>
-                    <textarea class="detail-control equal-control" id="dtTech"></textarea>
-                </div>
-
-                <div class="detail-group">
-                    <label>Yêu cầu tính mới:</label>
-                    <textarea class="detail-control" id="dtRequirement"></textarea>
-                </div>
+            <div class="detail-group">
+                <label>Phạm vi và chức năng:</label>
+                <textarea class="detail-control" id="dtScope" readonly style="height: 120px;"></textarea>
             </div>
 
+            <div class="detail-group">
+                <label>Công nghệ sử dụng:</label>
+                <input type="text" class="detail-control" id="dtTech" readonly>
+            </div>
+
+            <div class="detail-group">
+                <label>Yêu cầu tính mới:</label>
+                <textarea class="detail-control" id="dtRequirement" readonly></textarea>
+            </div>
 
             <div class="detail-group">
                 <label>Sản phẩm kết quả dự kiến:</label>
-                <textarea class="detail-control" id="dtResult"></textarea>
+                <textarea class="detail-control" id="dtResult" readonly></textarea>
             </div>
-            <div class="form-actions">
-                <button class="btn-action btn-save" id="btnSave"
-                        style="background-color:#0d6efd;color:white;border:none;">
-                    <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
+            <div class="divider-text">
+                <span>Thông tin thành viên</span>
+            </div>
+
+
+            <!-- THÀNH VIÊN CÒN LẠI -->
+            <div class="field field-full">
+                <label>Tên thành viên còn lại</label>
+                <textarea name="ten_thanhvien"
+                          rows="2"
+                          placeholder="VD: Nguyễn Văn B"
+                          required></textarea>
+            </div>
+
+            <div class="field field-full">
+                <label>Mã số sinh viên (MSSV)</label>
+                <textarea name="mssv_thanhvien"
+                          rows="2"
+                          placeholder="VD: 21IT1234"
+                          required></textarea>
+            </div>
+            <div style="display:flex; justify-content:flex-end; margin-top: 18px;">
+                <button type="submit"
+                        style="
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    border: none;
+                    background-color: #2563eb;
+                    color: #ffffff;
+                    font-weight: 600;
+                    font-size: 14px;
+                    cursor: pointer;
+                ">
+                    <i class="fa-solid fa-paper-plane"></i> Đăng ký
                 </button>
             </div>
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="~/css/XCT_Dexuat.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/Breadcrum.css" asp-append-version="true" />
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // 1. DỮ LIỆU GIẢ LẬP (MỚI)
@@ -94,8 +105,6 @@
             id: "DT-2025-001",
             name: "Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS",
             supervisor: "Ngô Thị Tuyết Như",
-            member1: "Trương Quốc Duy (2174802010297)",
-            member2: "Nguyễn Văn A (2174802010123)",
             goal: "Xây dựng mô hình AI có khả năng phân đoạn khối u não với độ chính xác cao trên 90% Dice Score.",
             scope: "Phạm vi: Nghiên cứu trên bộ dữ liệu BraTS 2021. Chức năng: Upload ảnh MRI, Phân đoạn tự động, Xuất báo cáo y khoa, Tích hợp API cho bệnh viện.",
             tech: "Python, PyTorch, U-Net, Transformer, Docker, ReactJS",
@@ -109,8 +118,6 @@
         document.getElementById('dtId').value = projectData.id;
         document.getElementById('dtName').value = projectData.name;
         document.getElementById('dtSupervisor').value = projectData.supervisor;
-        document.getElementById('dtMember1').value = projectData.member1;
-        document.getElementById('dtMember2').value = projectData.member2;
 
         document.getElementById('dtGoal').value = projectData.goal;
         document.getElementById('dtScope').value = projectData.scope; // Trường mới
@@ -156,7 +163,7 @@
                 adminComment.style.borderColor = "#ddd";
             }
         });
-
-
     });
 </script>
+<link rel="stylesheet" href="~/css/XCT_DT.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Breadcrum.css" asp-append-version="true" />

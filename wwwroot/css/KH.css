@@ -451,3 +451,10 @@
     border-radius: 10px;
     min-width: 300px;
 }
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+

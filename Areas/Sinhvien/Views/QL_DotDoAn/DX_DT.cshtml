@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Đề xuất đề tài";
     // Layout Lecturer bạn đang dùng
-    Layout = "~/Views/Shared/_Layout_GV.cshtml";
+    Layout = "~/Views/Shared/_Layout_SV.cshtml";
 
 
 }
@@ -76,9 +76,9 @@
                         <td>CNTT/CNPM</td>
                         <td><span class="status-badge status-running">Chờ duyệt</span></td>
                         <td>
-                            <a asp-area="Giangvien"
-                               asp-controller="QuanLyDotDoAn"
-                               asp-action="XCT_Dexuat"
+                            <a asp-area="Sinhvien"
+                               asp-controller="QL_DotDoAn"
+                               asp-action="XCT_DXDT"
                                asp-route-id="1">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </a>

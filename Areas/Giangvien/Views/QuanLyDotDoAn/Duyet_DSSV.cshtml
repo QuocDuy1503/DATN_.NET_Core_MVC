@@ -8,14 +8,12 @@
         <div class="info-section">
 
             <div class="form-header">
-                <a asp-area="Giangvien"
-                   asp-controller="QuanLyDotDoAn"
-                   asp-action="DSSV"
-                   class="btn-back-circle"
-                   title="Quay lại">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
-                <h3 class="form-title">Duyệt sinh viên</h3>
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb-simple">
+                    <a asp-area="Giangvien" asp-controller="QuanLyDotDoAn" asp-action="DuyetSV">Duyệt sinh viên</a>
+                    <span>&gt;</span>
+                    <span class="current">Duyệt sinh viên đăng ký</span>
+                </nav>
             </div>
 
             <!-- ===== THÔNG TIN ĐỀ TÀI (READONLY) ===== -->
@@ -136,6 +134,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/Duyet_DSSV.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Breadcrum.css" asp-append-version="true" />
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 

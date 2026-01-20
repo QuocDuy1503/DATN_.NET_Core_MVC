@@ -17,5 +17,9 @@ namespace DATN_TMS.Areas.Giangvien.Controllers
         {
             return View();
         }
+        public IActionResult XCT_KH()
+        {
+            return View();
+        }
     }
 }

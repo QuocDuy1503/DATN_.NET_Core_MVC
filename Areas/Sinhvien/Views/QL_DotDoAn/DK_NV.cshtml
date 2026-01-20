@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Đăng ký nguyện vọng";
+    Layout = "~/Views/Shared/_Layout_SV.cshtml";
+}
+
+<div class="content-body">
+    <div class="content-card">
+        <h2 class="page-title" style="margin-bottom: 20px;">Đăng ký nguyện vọng</h2>
+
+        <!-- FORM -->
+        <form id="dkNvForm" class="form" method="post" novalidate>
+
+            <section class="section">
+                <div class="section-title">
+                    <span class="hint">(*) bắt buộc</span>
+                </div>
+
+                <div class="grid">
+                    <div class="field">
+                        <label>Mã số SV <span>*</span></label>
+                        <input type="text" name="mssv" placeholder="VD: 21IT1234" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Họ và tên <span>*</span></label>
+                        <input type="text" name="hoten" placeholder="Nguyễn Văn A" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Lớp <span>*</span></label>
+                        <input type="text" name="lop" placeholder="VD: 21IT1" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Ngành/Chuyên ngành <span>*</span></label>
+                        <select name="nganh" required>
+                            <option value="" selected disabled>-- Chọn ngành --</option>
+                            <option>Công nghệ thông tin</option>
+                            <option>Kỹ thuật phần mềm</option>
+                            <option>Hệ thống thông tin</option>
+                            <option>Khoa học dữ liệu</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Email <span>*</span></label>
+                        <input type="email" name="email" placeholder="ten@email.com" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Số điện thoại <span>*</span></label>
+                        <input type="tel" name="sdt" placeholder="0xxxxxxxxx" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Số tín chỉ tích lũy <span>*</span></label>
+                        <input type="number" name="tc_tichluy" min="0" step="1" placeholder="VD: 95" required />
+                    </div>
+
+                    <div class="field">
+                        <label>Điểm tích lũy (GPA) <span>*</span></label>
+                        <input type="number" name="gpa" min="0" max="4" step="0.01" placeholder="VD: 3.12" required />
+                        <small class="help">Thang điểm 4.00 (nếu trường bạn dùng thang 10 thì đổi max=10).</small>
+                    </div>
+
+                    <div class="field field-full">
+                        <label>Môn còn nợ</label>
+                        <textarea name="mon_conno" rows="3"
+                                  placeholder="VD: Toán rời rạc, Cơ sở dữ liệu... (nếu không có, ghi: Không)"></textarea>
+                    </div>
+
+                    <div class="field field-full">
+                        <label>Môn đăng ký kỳ này <span>*</span></label>
+                        <textarea name="mon_dangky" rows="3"
+                                  placeholder="VD: Lập trình Web nâng cao, Đồ án tốt nghiệp..." required></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CẢNH BÁO / THÀNH CÔNG -->
+            <div id="formAlert" class="alert" role="alert" aria-live="polite" hidden>
+                Vui lòng điền đầy đủ các trường bắt buộc (ô có dấu *) trước khi gửi.
+            </div>
+
+            <div id="successAlert" class="alert alert-success" role="status" aria-live="polite" hidden>
+                ✅ Đăng ký nguyện vọng đồ án thành công. Vui lòng chờ xét duyệt từ khoa/giảng viên hướng dẫn.
+            </div>
+
+            <!-- GỬI -->
+            <section class="section">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Gửi đăng ký</button>
+                </div>
+            </section>
+
+        </form>
+        <!-- /FORM -->
+
+    </div>
+</div>
+<link rel="stylesheet" href="~/css/DK_NV.css" asp-append-version="true" />
+<script src="~/js/dk_nv.js"></script>
+

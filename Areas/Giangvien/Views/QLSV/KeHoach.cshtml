@@ -8,10 +8,14 @@
 <div class="content-body">
     <div class="content-card">
         <div class="form-header">
-            <a href="QLSV.html" class="btn-back-circle" title="Quay lại danh sách">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <h3 class="form-title">Bảng kế hoạch</h3>
+            <div class="header-title">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb-simple">
+                    <a asp-area="Giangvien" asp-controller="QLSV" asp-action="DSSV">Quản lý sinh viên</a>
+                    <span>&gt;</span>
+                    <span class="current">Bảng kế hoạch</span>
+                </nav>
+            </div>
         </div>
         <div class="toolbar-row">
             <div class="toolbar-left">
@@ -65,7 +69,10 @@
                         </td>
 
                         <td class="action-more">
-                            <a>
+                            <a asp-area="Giangvien"
+                               asp-controller="QLSV"
+                               asp-action="XCT_KH"
+                               asp-route-id="1">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </td>
@@ -77,6 +84,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/KH.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/Breadcrum.css" asp-append-version="true" />
 <script src="~/js/KH.js" asp-append-version="true"></script>
 <script>
         document.querySelectorAll(".status-select").forEach(select => {
